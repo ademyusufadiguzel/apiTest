@@ -27,32 +27,46 @@ public class RequestResponse extends ReusableMethods{
             iv)  Do assertion
      */
 
+    static Response response;
     public static void main(String[] args) {
 
         String path = "https://restful-booker.herokuapp.com/booking/55";
 
         //Get request nasil yapilir:
-        Response response = get(path);
-        response.prettyPrint();
 
-        //Status Code nasil yazdirilir?
-        System.out.println("Status Code: " + response.statusCode());
+//      response = get(path);
+        getRequestWithID("2",response);
 
-        //Content Type nasil yazdirilir?
-        System.out.println("Content Type: " + response.contentType());
+        getStatusCode();
 
-        //Status Line nasil yazdirilir?
-        System.out.println("Status Line: " + response.statusLine());
+        getContentType();
 
-        //Header nasil yazdirilir:
-        System.out.println(response.header("Connection"));
-        System.out.println(response.header("Server"));
+        getStatusLine();
 
-        //Headers nasil yazdirilir:
-        System.out.println(response.headers());
+        getHeader("Connection");
 
-        //Time Nasil yazdirilir:
-        System.out.println("Time: " + response.getTime());
+        getHeaders();
+
+        getTime();
+
+//        //Status Code nasil yazdirilir?
+//        System.out.println("Status Code: " + response.statusCode());
+//
+//        //Content Type nasil yazdirilir?
+//        System.out.println("Content Type: " + response.contentType());
+//
+//        //Status Line nasil yazdirilir?
+//        System.out.println("Status Line: " + response.statusLine());
+//
+//        //Header nasil yazdirilir:
+//        System.out.println(response.header("Connection"));
+//        System.out.println(response.header("Server"));
+//
+//        //Headers nasil yazdirilir:
+//        System.out.println(response.headers());
+//
+//        //Time Nasil yazdirilir:
+//        System.out.println("Time: " + response.getTime());
 
 
 

@@ -2,7 +2,9 @@ package get_requests;
 
 import io.restassured.response.Response;
 import org.junit.Test;
+
 import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.given;
 
 public class Get01 {
 
@@ -22,7 +24,7 @@ public class Get01 {
           */
 
     @Test
-    public void get01(){
+    public void get01() {
 
         //i)   Set the URL
         String url = "https://restful-booker.herokuapp.com/booking/55";
@@ -31,12 +33,15 @@ public class Get01 {
         //iii) Send the request and get the response
         response = get(url);//User sends a GET Request to the url
         response.prettyPrint();
+        given();
 
         //iv)  Do assertion
         response.then().
                 statusCode(200).//HTTP Status Code should be 200
                 contentType("application/json").//Content Type should be JSON
                 statusLine("HTTP/1.1 200 OK");//Status Line should be HTTP/1.1 200 OK
+
+        System.out.println(response.headers());
 
     }
 
