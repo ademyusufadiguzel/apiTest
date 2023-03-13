@@ -49,6 +49,7 @@ public class RequestResponse extends ReusableMethods{
 
         getTime();
 
+
 //        //Status Code nasil yazdirilir?
 //        System.out.println("Status Code: " + response.statusCode());
 //

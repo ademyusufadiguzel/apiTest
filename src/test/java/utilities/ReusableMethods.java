@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.get;
 
 public abstract class ReusableMethods {
 
-    static Response allResponse;
+    protected static Response allResponse;
 
     public static void getRequestWithID(String id, Response response) {
         response = get("https://restful-booker.herokuapp.com/booking/"+id);
@@ -42,8 +42,5 @@ public abstract class ReusableMethods {
     public static void getTime(){
         System.out.println("Time: " + allResponse.getTime());
     }
-
-
-
 
 }
