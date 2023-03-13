@@ -1,5 +1,6 @@
 package get_requests;
 
+import base_urls.JsonPlaceHolderBaseUrl;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
@@ -8,7 +9,7 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 
-public class Get04 {
+public class Get04 extends JsonPlaceHolderBaseUrl {
 
     /*
         Given
@@ -34,16 +35,16 @@ public class Get04 {
 
         //Set the URL
         //String url = "https://jsonplaceholder.typicode.com/todos";
+        spec.pathParam("first", "todos");
 
         //Set the expected data
 
         //Send the request and get the response
-        Response response = given().accept(ContentType.JSON).when().get();
-        response.then().
-                statusCode(200).
-                contentType("application/json").
-                contentType(ContentType.JSON).
-                body("title",equalTo("quis eius est sint explicabo"),"id",hasSize(200),"userId",hasItems(2,7,9));
+        Response response = given().spec(spec).when().get("/{first}");
+        response.then().statusCode(200).contentType(ContentType.JSON).
+                body("id",hasSize(200), //There should be 200 todos
+                        "title",hasItem("quis eius est sint explicabo"), //"quis eius est sint explicabo" should be one of the todos title
+                        "userId",hasItems(2,7,9)); //2, 7, and 9 should be among the userIds
 
     }
 
