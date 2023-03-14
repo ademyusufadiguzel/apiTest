@@ -46,6 +46,12 @@ public class Get04 extends JsonPlaceHolderBaseUrl {
                         "title",hasItem("quis eius est sint explicabo"), //"quis eius est sint explicabo" should be one of the todos title
                         "userId",hasItems(2,7,9)); //2, 7, and 9 should be among the userIds
 
+        //hasSize() ==> eleman sayısını assert eder.
+        //hasItem() ==> contains() methodu gibi objenin içerilip içerilmediğini assert eder.
+        //hasItems() ==> containsAll() methodu gibi birden fazla objenin içerilip içerilmediğini assert eder.
+
+
+
     }
 
 }
