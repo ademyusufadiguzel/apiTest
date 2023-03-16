@@ -49,7 +49,6 @@ public class work05 extends ReqresBaserUrl {
         response.prettyPrint();
 
         response.then().statusCode(200).contentType("application/json; charset=utf-8");
-
         JsonPath jsonPath = response.jsonPath();
         SoftAssert softAssert = new SoftAssert();
 
@@ -67,6 +66,9 @@ public class work05 extends ReqresBaserUrl {
             "text": "To keep ReqRes free, contributions towards server costs are appreciated!"
         }
          */
+
+
+        // 1. Yol:
         softAssert.assertEquals(jsonPath.getInt("data.id"), 3, "data.id failed");
         softAssert.assertEquals(jsonPath.getString("data.name"), "true red", "data.name failed");
         softAssert.assertEquals(jsonPath.getInt("data.year"), 2002, "data.year failed");
@@ -76,7 +78,29 @@ public class work05 extends ReqresBaserUrl {
         softAssert.assertEquals(jsonPath.getString("support.text"), "To keep ReqRes free, contributions towards server costs are appreciated!", "support.text failed");
 
         softAssert.assertAll();
+
+        // 2. Yol:
+        Map<String,Map<String,Object>> expectedData = new HashMap<>();
+
+        expectedData.put("data",Map.of("id",3));
+        expectedData.put("data",Map.of("name","true red"));
+        expectedData.put("data",Map.of("year",2002));
+        expectedData.put("data",Map.of("color","#BF1932"));
+        expectedData.put("data",Map.of("pantone_value","19-1664"));
+        expectedData.put("support",Map.of("url", "https://reqres.in/#support-heading"));
+        expectedData.put("support",Map.of("text", "To keep ReqRes free, contributions towards server costs are appreciated!"));
+
+        Map<String, Map<String,Object>> actualData = response.as(HashMap.class);
+
+        softAssert.assertEquals(expectedData.get("data.id"),actualData.get("data.id"));
+        softAssert.assertEquals(expectedData.get("data.name"),actualData.get("data.name"));
+        softAssert.assertEquals(expectedData.get("data.year"),actualData.get("data.year"));
+        softAssert.assertEquals(expectedData.get("data.color"),actualData.get("data.color"));
+        softAssert.assertEquals(expectedData.get("data.pantone_value"),actualData.get("data.pantone_value"));
+        softAssert.assertEquals(expectedData.get("support.url"),actualData.get("support.url"));
+        softAssert.assertEquals(expectedData.get("support.text"),actualData.get("support.text"));
+
+        softAssert.assertAll();
+
     }
-
-
 }
