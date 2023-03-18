@@ -54,12 +54,16 @@ public class Get08 extends JsonPlaceHolderBaseUrl {
         JsonPlaceHolderTestData testData = new JsonPlaceHolderTestData();
         Map<String, Object> expectedData = testData.expectedDataMethod(1,"quis ut nam facilis et officia qui",false);
         Map<String, Object> actualData = response.as(HashMap.class);
+        expectedData.put("id",2);
+        expectedData.put("Via","1.1 vegur");
+        expectedData.put("Server","cloudflare");
 
         Assert.assertEquals(expectedData.get("userId"), actualData.get("userId"));
         Assert.assertEquals(expectedData.get("completed"), actualData.get("completed"));
         Assert.assertEquals(expectedData.get("title"), actualData.get("title"));
-        Assert.assertEquals("1.1 vegur", response.header("Via"));
-        Assert.assertEquals("cloudflare", response.header("Server"));
+        Assert.assertEquals(expectedData.get("id"), actualData.get("id"));
+        Assert.assertEquals(expectedData.get("Via"), response.getHeader("Via"));
+        Assert.assertEquals(expectedData.get("Server"), response.getHeader("Server"));
 
 
 
