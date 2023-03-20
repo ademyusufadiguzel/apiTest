@@ -52,5 +52,4 @@ public class Work06 extends ReqresBaserUrl {
         Assert.assertEquals(2, idNames.size());
 
     }
-
 }
