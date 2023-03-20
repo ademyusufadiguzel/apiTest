@@ -4,20 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GoRestDataPojo {
-
     private String name;
     private String email;
     private String gender;
     private String status;
+
+    public GoRestDataPojo() {
+    }
 
     public GoRestDataPojo(String name, String email, String gender, String status) {
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.status = status;
-    }
-
-    public GoRestDataPojo() {
     }
 
     public String getName() {

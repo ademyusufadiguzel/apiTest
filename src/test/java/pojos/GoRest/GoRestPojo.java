@@ -4,16 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GoRestPojo {
-
     private Object meta;
-    private GoRestPojo data;
-
-    public GoRestPojo(Object meta, GoRestPojo data) {
-        this.meta = meta;
-        this.data = data;
-    }
+    private GoRestDataPojo data;
 
     public GoRestPojo() {
+    }
+
+    public GoRestPojo(Object meta, GoRestDataPojo data) {
+        this.meta = meta;
+        this.data = data;
     }
 
     public Object getMeta() {
@@ -24,11 +23,11 @@ public class GoRestPojo {
         this.meta = meta;
     }
 
-    public GoRestPojo getData() {
+    public GoRestDataPojo getData() {
         return data;
     }
 
-    public void setData(GoRestPojo data) {
+    public void setData(GoRestDataPojo data) {
         this.data = data;
     }
 
