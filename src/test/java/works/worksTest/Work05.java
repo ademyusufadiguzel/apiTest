@@ -1,6 +1,5 @@
 package works.worksTest;
 
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Test;
@@ -12,7 +11,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-public class work05 extends ReqresBaserUrl {
+public class Work05 extends ReqresBaserUrl {
 
     /*
         Given
