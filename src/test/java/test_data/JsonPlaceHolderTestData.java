@@ -15,7 +15,18 @@ public class JsonPlaceHolderTestData {
         return expectedData;
     }
 
+    public static String expectedDataInString(Integer userId, String title, Boolean completed){
+
+        return " \"userId\": "+userId+", \"title\": \""+title+"\", \"completed\": "+completed+"}";
+
+    }
+
 }
+
+
+/*
+{ "userId": 10, "id": 198, "title": "quis eius est sint explicabo", "completed": true}
+ */
 
 /*
     Map<String, Object> expectedData = new HashMap<>();
