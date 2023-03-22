@@ -58,7 +58,6 @@ public class S2_Put extends HerokuappBaseUrl {
         //Send the request and get the response
         Response response = given().
                 spec(spec).
-                header("Cookie", "token=" + generateToken()).
                 body(expectedData).put("/{first}/{second}");
 
         response.prettyPrint();
