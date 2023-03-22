@@ -1,44 +1,82 @@
 package herokuapp_smoketest;
 
 import base_urls.HerokuappBaseUrl;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Test;
 import pojos.HerOkuApp.BookingDatesPojo;
 import pojos.HerOkuApp.BookingPojo;
-import pojos.HerOkuApp.BookingResponsePojo;
 import util.ObjectMapperUtils;
+
+import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertEquals;
 import static util.AuthenticationHerOkuApp.generateToken;
 
-import static herokuapp_smoketest.S1_Post.bookingId;
-import static io.restassured.RestAssured.given;
-
 public class S2_Put extends HerokuappBaseUrl {
-
     /*
-    Given:
-        1) https://restful-booker.herokuapp.com/booking/{id}
-        2) {
+    Given
+       1) https://restful-booker.herokuapp.com/booking/{id}
+       2) {
+            "firstname" : "Ali",
+            "lastname" : "Can",
+            "totalprice" : 111,
+            "depositpaid" : true,
+            "bookingdates" : {
+                "checkin" : "2018-01-01",
+                "checkout" : "2019-01-01"
+            },
+            "additionalneeds" : "Breakfast"
+        }
+    When
+        Send Put request
+    Then
+        Status code should be 200
+    And
+          {
+            "firstname": "Ali",
+            "lastname": "Can",
+            "totalprice": 111,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": "2018-01-01",
+                "checkout": "2019-01-01"
+            },
+            "additionalneeds": "Breakfast"
+        }
+
      */
 
     @Test
-    public void put01(){
-        spec.pathParams("first", "booking", "second",4259);
+    public void put01() {
+        //Set the url
+        spec.pathParams("first", "booking", "second", 7023);
 
-        BookingDatesPojo bookingDatesPojo = new BookingDatesPojo("2018-01-01","2019-01-01");
-        BookingPojo expectedData = new BookingPojo("Adem","Can", 111,true,bookingDatesPojo,"Breakfast");
+        //Set the expected data
+        BookingDatesPojo bookingDatesPojo = new BookingDatesPojo("2018-01-01", "2019-01-01");
+        BookingPojo expectedData = new BookingPojo("Adem", "Yusuf", 111, true, bookingDatesPojo, "Breakfast");
         System.out.println("expectedData = " + expectedData);
 
-        Response response = given().spec(spec)
-                .header("Cookie","token="+generateToken())
-                .body(expectedData).put("/{first}/{second}");
+        //Send the request and get the response
+        Response response = given().
+                spec(spec).
+                header("Cookie", "token=" + generateToken()).
+                body(expectedData).put("/{first}/{second}");
+
         response.prettyPrint();
 
-//        BookingResponsePojo actualData = ObjectMapperUtils.convertJsonToJava(response.asString(), BookingResponsePojo.class);
-//        System.out.println("actualData = " + actualData);
+        //Do Assertion
+        BookingPojo actualData = ObjectMapperUtils.convertJsonToJava(response.asString(), BookingPojo.class);
+        System.out.println("actualData = " + actualData);
+        assertEquals(200, response.statusCode());
 
-        //TOKEN ALMAK
+        assertEquals(expectedData.getFirstname(), actualData.getFirstname());
+        assertEquals(expectedData.getLastname(), actualData.getLastname());
+        assertEquals(expectedData.getTotalprice(), actualData.getTotalprice());
+        assertEquals(expectedData.getDepositpaid(), actualData.getDepositpaid());
+
+        assertEquals(bookingDatesPojo.getCheckin(), actualData.getBookingdates().getCheckin());
+        assertEquals(bookingDatesPojo.getCheckout(), actualData.getBookingdates().getCheckout());
+
+        assertEquals(expectedData.getAdditionalneeds(), actualData.getAdditionalneeds());
 
     }
-
 }
