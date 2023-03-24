@@ -7,6 +7,7 @@ import pojos.HerOkuApp.BookingDatesPojo;
 import pojos.HerOkuApp.BookingPojo;
 import util.ObjectMapperUtils;
 
+import static herokuapp_smoketest.S1_Post.bookingId;
 import static io.restassured.RestAssured.given;
 import static org.junit.Assert.assertEquals;
 import static util.AuthenticationHerOkuApp.generateToken;
@@ -48,17 +49,15 @@ public class S2_Put extends HerokuappBaseUrl {
     @Test
     public void put01() {
         //Set the url
-        spec.pathParams("first", "booking", "second", 7023);
+        spec.pathParams("first", "booking", "second", bookingId);
 
         //Set the expected data
         BookingDatesPojo bookingDatesPojo = new BookingDatesPojo("2018-01-01", "2019-01-01");
-        BookingPojo expectedData = new BookingPojo("Adem", "Yusuf", 111, true, bookingDatesPojo, "Breakfast");
+        BookingPojo expectedData = new BookingPojo("Ali", "Can", 111, true, bookingDatesPojo, "Breakfast");
         System.out.println("expectedData = " + expectedData);
 
         //Send the request and get the response
-        Response response = given().
-                spec(spec).
-                body(expectedData).put("/{first}/{second}");
+        Response response = given().spec(spec).body(expectedData).put("/{first}/{second}");
 
         response.prettyPrint();
 

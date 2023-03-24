@@ -9,6 +9,7 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class AuthenticationHerOkuApp {
+
     public static String generateToken() {
 
         String url = "https://restful-booker.herokuapp.com/auth";
