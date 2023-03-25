@@ -53,12 +53,12 @@ public class Post06 extends DummyRestApiBaseUrl {
         System.out.println("actualData = " + actualData);
 
         assertEquals(200,response.statusCode());
-        assertEquals(body.getStatus(),actualData.getStatus());
-        assertEquals(body.getMessage(),actualData.getMessage());
         assertEquals(expectedData.getProfile_image(),actualData.getData().getProfile_image());
         assertEquals(expectedData.getEmployee_age(),actualData.getData().getEmployee_age());
         assertEquals(expectedData.getEmployee_name(),actualData.getData().getEmployee_name());
         assertEquals(expectedData.getEmployee_salary(),actualData.getData().getEmployee_salary());
+        assertEquals(body.getStatus(),actualData.getStatus());
+        assertEquals(body.getMessage(),actualData.getMessage());
 
 
 
