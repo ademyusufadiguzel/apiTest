@@ -82,6 +82,7 @@ public class PostCountry extends GmiBankBaseUrl{
         Country expectedData = new Country("Banana Republic",statesList);
 
         Response response = given(spec).when().body(expectedData).post("/{first}/{second}");
+        response.prettyPrint();
 
         Country actualData = ObjectMapperUtils.convertJsonToJava(response.asString(), Country.class);
 
