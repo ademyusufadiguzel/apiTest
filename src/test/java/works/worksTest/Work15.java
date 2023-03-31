@@ -6,6 +6,9 @@ import io.restassured.response.Response;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
@@ -38,7 +41,25 @@ public class Work15 extends DummyRestApiBaseUrl {
         response.prettyPrint();
         assertEquals(200, response.statusCode());
         response.then().body("data.id",hasSize(24),"data.employee_name",hasItems("Tiger Nixon","Garrett Winters"));
-        System.out.println(jsPath.getList("data.findAll{it.employee_age>66}.id"));
+        List<Integer> ages = jsPath.getList("data.employee_age");
+        System.out.println("ages = " + ages);
+        
+        Collections.sort(ages);
+        System.out.println("Sorted id = " + ages);
+
+        int expectedData = ages.get(ages.size()-1);
+        assertEquals(66,expectedData);
+
+        String name = jsPath.getString("data.findAll{it.employee_age=="+ages.get(0)+"}.employee_name");
+        System.out.println("name = " + name);
+        assertEquals("[Tatyana Fitzpatrick]",name);
+
+        List<Integer> salarys = jsPath.getList("data.findAll{it.employee_salary}.employee_salary");
+        System.out.println("salarys = " + salarys);
+
+        int sum = salarys.stream().reduce(0,Math::addExact);
+        assertEquals(6644770, sum);
+
 
 
     }
